@@ -8,7 +8,8 @@ def move_domino(arrangement, iterations):
             if all([char in allowable_chars for char in arrangement]):  # checking if 'arrangement' contains
                 # only allowable characters.
                 arrangement_list = list(arrangement)
-                arr_list_bef_iter = arrangement_list.copy()
+                arr_list_bef_iter = arrangement_list.copy()  # 'arrangement list before iteration' - to avoid checking
+                # some arrangements after changes during one iteration
                 for iteration in range(iterations):
                     for position, domino in enumerate(arrangement_list):
                         if domino == '|':
@@ -28,8 +29,3 @@ def move_domino(arrangement, iterations):
             raise domino_exceptions.NotAllowableCharError(arrangement)
         raise domino_exceptions.EmptyInputStringError()
     raise domino_exceptions.InvalidInputDataTypesError()
-
-
-print(move_domino('||//||\\||/\\|', 1))
-
-
