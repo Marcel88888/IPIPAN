@@ -15,3 +15,11 @@ class NotAllowableCharError(Exception):
         self.__given_string = given_string
         self.__message = f'Error: Given string ("{self.__given_string}") contains illicit characters.'
         super().__init__(self.__message)
+
+
+class ReverseAlgorithmNotPossibleError(Exception):
+    def __init__(self, given_string):
+        self.__given_string = given_string
+        self.__message = fr'Error: It is not possible to create a reverse algorithm for this arrangement \
+        ("{self.__given_string}"): it contains "///" or "\\\").'
+        super().__init__(self.__message)
