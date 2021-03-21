@@ -22,7 +22,7 @@ def check_input(att_type, def_types):
 def get_attack_value(att_type, def_types):
     """
     Based on the type of movement (attack), it calculates the effectiveness (damage factor) against a pokemon of a given
-    type (or types).
+    type (or types). It calculates a product of the attack values of the given types.
     :param str att_type: type of the attack
     :param list def_types: type(s) of the pokemon under attack
     :raise pokemons_exceptions.AttackNotDefinedError if there is not a pokemon type given in the 'def_types'
@@ -35,7 +35,7 @@ def get_attack_value(att_type, def_types):
     data = response.json()
     damage_relations = data['damage_relations']
     damages = []
-    damage_types = {
+    damage_types = {  # dict with damage values as keys and list of names of pokemon types as values
         key: [damage_type['name'] for damage_type in damage_relations[key]]
         for key in damage_relations.keys()
     }
@@ -55,6 +55,7 @@ def get_attack_value(att_type, def_types):
                 damages.append(poss_pos_att_values[attack_key])
                 break
         if not found and requests.get(url_with_no_type + f'{def_type}').status_code != 200:
+            # If there is not a pokemon type given in the 'def_types'.
             raise pokemons_exceptions.AttackNotDefinedError(def_type)
 
     attack_value = 1
