@@ -7,7 +7,7 @@ def check_input(arrangement, iterations):
     :param str arrangement: starting arrangement of dominoes
     :param int iterations: number of iterations to perform
     :raise:
-        domino_exceptions.InvalidInputDataTypesError if 'arrangement' is not str or 'iterations' is not int or
+        domino_exceptions.InvalidInputDataTypesError if 'arrangement' is not a str or 'iterations' is not an int or
     iterations is negative
         domino_exceptions.EmptyInputStringError if 'arrangement' is an empty string
         domino_exceptions.NotAllowableCharError if 'arrangement' contains illicit characters
@@ -62,6 +62,8 @@ def move_domino_back(arrangement, iterations):
     The function performs reverse domino movement.
     :param str arrangement: starting arrangement of dominoes
     :param int iterations: number of iterations to perform
+    :raise: domino_exceptions.ReverseAlgorithmNotPossibleError if the arrangement contains at least three '/' or '\'
+    characters next to each other ('///' or '\\\' at least)
     :return str: arrangement of the domino before given number of iterations
     """
     check_input(arrangement, iterations)

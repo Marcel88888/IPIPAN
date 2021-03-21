@@ -3,6 +3,15 @@ from exceptions import pokemons_exceptions
 
 
 def check_input(att_type, def_types):
+    """
+    Checks if the given parameters are correct.
+    :param str att_type: type of the attack
+    :param int def_types: type(s) of the pokemon under attack
+    :raise:
+        pokemons_exceptions.InvalidInputDataTypesError if 'att_type' is not a str or 'def_types' is not a list or
+    'def_types' contains elements which are not strings
+        pokemons_exceptions.EmptyInputStringError if 'att_type' is an empty str or 'def_types' contains empty strings
+    """
     if not isinstance(att_type, str) or not isinstance(def_types, list) or \
             any(not isinstance(def_type, str) for def_type in def_types):
         raise pokemons_exceptions.InvalidInputDataTypesError()
@@ -11,6 +20,13 @@ def check_input(att_type, def_types):
 
 
 def get_attack_value(att_type, def_types):
+    """
+    Based on the type of movement (attack), it calculates the effectiveness (damage factor) against a pokemon of a given
+    type (or types).
+    :param str att_type: type of the attack
+    :param list def_types: type(s) of the pokemon under attack
+    :return int/float: effectiveness (damage factor) of the attack
+    """
     check_input(att_type, def_types)
     url = f"https://pokeapi.co/api/v2/type/{att_type}"
     response = requests.get(url)
