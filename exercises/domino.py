@@ -3,14 +3,13 @@ from exceptions import domino_exceptions
 
 def check_input(arrangement, iterations):
     allowable_chars = ['|', '/', '\\']
-    if isinstance(arrangement, str) and isinstance(iterations, int) and iterations >= 0:
-        if arrangement != '':
-            if all([char in allowable_chars for char in arrangement]):  # checking if 'arrangement' contains
-                # only allowable characters.
-                return
-            raise domino_exceptions.NotAllowableCharError(arrangement)
+    if not isinstance(arrangement, str) or not isinstance(iterations, int) or iterations < 0:
+        raise domino_exceptions.InvalidInputDataTypesError()
+    if not arrangement:
         raise domino_exceptions.EmptyInputStringError()
-    raise domino_exceptions.InvalidInputDataTypesError()
+    if any([char not in allowable_chars for char in arrangement]):  # checking if 'arrangement' contains
+        # only allowable characters.
+        raise domino_exceptions.NotAllowableCharError(arrangement)
 
 
 def move_domino(arrangement, iterations):

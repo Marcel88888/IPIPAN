@@ -1,7 +1,17 @@
 import requests
+from exceptions import pokemons_exceptions
+
+
+def check_input(att_type, def_types):
+    if not isinstance(att_type, str) or not isinstance(def_types, list) or \
+            any(not isinstance(def_type, str) for def_type in def_types):
+        raise pokemons_exceptions.InvalidInputDataTypesError()
+    if not att_type or '' in def_types:
+        raise pokemons_exceptions.EmptyInputStringError()
 
 
 def get_attack_value(att_type, def_types):
+    check_input(att_type, def_types)
     url = f"https://pokeapi.co/api/v2/type/{att_type}"
     response = requests.get(url)
     data = response.json()
