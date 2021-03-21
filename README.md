@@ -9,3 +9,5 @@ To run tests to check the correctness of the solution you need to use:
 instruction in the project directory.
 
 To create a virtual environment with all necessary packages use `requirements.txt`.
+
+Python version: 3.8
