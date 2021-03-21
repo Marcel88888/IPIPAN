@@ -2,6 +2,16 @@ from exceptions import domino_exceptions
 
 
 def check_input(arrangement, iterations):
+    """
+    Checks if the given parameters are correct.
+    :param str arrangement: starting arrangement of dominoes
+    :param int iterations: number of iterations to perform
+    :raise:
+        domino_exceptions.InvalidInputDataTypesError if 'arrangement' is not str or 'iterations' is not int or
+    iterations is negative
+        domino_exceptions.EmptyInputStringError if 'arrangement' is an empty string
+        domino_exceptions.NotAllowableCharError if 'arrangement' contains illicit characters
+    """
     allowable_chars = ['|', '/', '\\']
     if not isinstance(arrangement, str) or not isinstance(iterations, int) or iterations < 0:
         raise domino_exceptions.InvalidInputDataTypesError()
@@ -13,6 +23,16 @@ def check_input(arrangement, iterations):
 
 
 def move_domino(arrangement, iterations):
+    """
+    The function returns a string representing the arrangement of dominoes over a given number of iterations.
+    Dominoes are represented in the form of a string, which consists of the following characters:
+    '|' - the domino is intact
+    '/' - the domino falls to the right
+    '\' - the domino falls to the left
+    :param str arrangement: starting arrangement of dominoes
+    :param int iterations: number of iterations to perform
+    :return str: final arrangement of the domino
+    """
     check_input(arrangement, iterations)
     arrangement_list = list(arrangement)
     arr_list_bef_iter = arrangement_list.copy()  # 'arrangement list before iteration' - to avoid checking
@@ -38,6 +58,12 @@ def move_domino(arrangement, iterations):
 
 
 def move_domino_back(arrangement, iterations):
+    """
+    The function performs reverse domino movement.
+    :param str arrangement: starting arrangement of dominoes
+    :param int iterations: number of iterations to perform
+    :return str: arrangement of the domino before given number of iterations
+    """
     check_input(arrangement, iterations)
     if '///' in arrangement or '\\\\\\' in arrangement:
         raise domino_exceptions.ReverseAlgorithmNotPossibleError(arrangement)
